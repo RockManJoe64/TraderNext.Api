@@ -25,7 +25,7 @@ jobs:
         CONFIGURATION=Release
         echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
         echo "CONFIG=$CONFIGURATION" >> $GITHUB_ENV
-        echo "NUPKG_PATH=./bin/$CONFIGURATION/TraderNext.Api.$VERSION_NEW.nupkg"
+        echo "NUPKG_PATH=./bin/$CONFIGURATION/TraderNext.Api.$VERSION_NEW.nupkg" >> $GITHUB_ENV
 
     - name: Adjust NuGet config credentials
       run: |
@@ -43,4 +43,4 @@ jobs:
       run: dotnet pack --configuration ${{ env.CONFIG }} /p:Version=${{ env.BUILD_VERSION }}
 
     - name: Push
-      run: dotnet nuget push $NUPKG_PATH --source "github" --skip-duplicate --api-key ${{ secrets.PACKAGE_PASSWORD }}
+      run: dotnet nuget push ${{ env.NUPKG_PATH }} --source "github" --skip-duplicate --api-key ${{ secrets.PACKAGE_PASSWORD }}
