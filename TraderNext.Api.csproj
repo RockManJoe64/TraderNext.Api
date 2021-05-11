@@ -8,8 +8,16 @@
     <Authors>Jose</Authors>
     <Company>RockmanJoe64</Company>
     <PackageDescription>An Open API specification for the TraderNEXT platform</PackageDescription>
+    <PackageIconUrl>https://github.com/RockManJoe64/TraderNext.Api/raw/develop/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/RockManJoe64/TraderNext.Api</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>false</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="dotnet.yml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.10.9" />

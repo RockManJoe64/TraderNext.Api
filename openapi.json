@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "description": "The REST API for the TraderNEXT platform.",
-    "version": "0.1.0",
+    "version": "0.1.X",
     "title": "TraderNEXT API",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
