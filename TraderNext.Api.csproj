@@ -11,7 +11,7 @@
     <PackageIconUrl>https://github.com/RockManJoe64/TraderNext.Api/raw/develop/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/RockManJoe64/TraderNext.Api</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <IncludeSymbols>false</IncludeSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
