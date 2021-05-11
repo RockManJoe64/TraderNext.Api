@@ -20,12 +20,12 @@ jobs:
     - name: Setup version and environment
       run: |
         sudo apt install jq
-        VERSION=`jq ".info.version" openapi.json`
+        VERSION=`jq ".info.version" openapi.json | tr -d \"`
         echo $VERSION
         VERSION_NEW=`echo $VERSION | sed -e "s/X/$GITHUB_RUN_NUMBER/"`
         echo $VERSION_NEW
         sed -i -e "s/$VERSION/$VERSION_NEW/" openapi.json
-        echo "BUILD_VERSION=`$VERSION_NEW | tr -d \"`" >> $GITHUB_ENV
+        echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
         echo "CONFIG=Release" >> $GITHUB_ENV
         echo $GITHUB_ENV
 
