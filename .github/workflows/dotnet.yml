@@ -35,10 +35,10 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore --configuration ${{ env.PACKAGE_CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
+      run: dotnet build --no-restore --configuration ${{ secrets.PACKAGE_CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
 
     - name: Pack
-      run: dotnet pack --configuration ${{ env.PACKAGE_CONFIG }} --no-build /p:Version=${{ env.BUILD_VERSION }}
+      run: dotnet pack --configuration ${{ secrets.PACKAGE_CONFIG }} --no-build /p:Version=${{ env.BUILD_VERSION }}
 
     - name: Push
       run: dotnet nuget push **/*.nupkg --source "github" --skip-duplicate
