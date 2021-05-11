@@ -1,7 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>TraderNext.Api</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Jose</Authors>
+    <Company>RockmanJoe64</Company>
+    <PackageDescription>An Open API specification for the TraderNEXT platform</PackageDescription>
+    <RepositoryUrl>https://github.com/RockManJoe64/TraderNext.Api</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
