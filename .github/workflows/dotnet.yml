@@ -17,17 +17,13 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - name: Setup version and environment
+    - name: Setup version
       run: |
         sudo apt install jq
         VERSION=`jq ".info.version" openapi.json | tr -d \"`
-        echo $VERSION
         VERSION_NEW=`echo $VERSION | sed -e "s/X/$GITHUB_RUN_NUMBER/"`
-        echo $VERSION_NEW
         sed -i -e "s/$VERSION/$VERSION_NEW/" openapi.json
         echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
-        echo "CONFIG=Release" >> $GITHUB_ENV
-        echo $GITHUB_ENV
 
     - name: Adjust NuGet config credentials
       run: |
@@ -39,10 +35,10 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration ${{ env.PACKAGE_CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
 
     - name: Pack
-      run: dotnet pack --configuration ${{ env.CONFIG }} --no-build /p:Version=${{ env.BUILD_VERSION }}
+      run: dotnet pack --configuration ${{ env.PACKAGE_CONFIG }} --no-build /p:Version=${{ env.BUILD_VERSION }}
 
     - name: Push
       run: dotnet nuget push **/*.nupkg --source "github" --skip-duplicate
