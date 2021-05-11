@@ -24,7 +24,6 @@ jobs:
         VERSION_NEW=`echo $VERSION | sed -e "s/X/$GITHUB_RUN_NUMBER/"`
         sed -i -e "s/$VERSION/$VERSION_NEW/" openapi.json
         echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
-        echo "CONFIG=${{ secrets.PACKAGE_CONFIG }" >> $GITHUB_ENV
 
     - name: Adjust NuGet config credentials
       run: |
@@ -36,10 +35,10 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore --configuration ${{ env.CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
+      run: dotnet build --no-restore --configuration ${{ secrets.PACKAGE_CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
 
     - name: Pack
-      run: dotnet pack --configuration ${{ env.CONFIG }} --no-build /p:Version=${{ env.BUILD_VERSION }}
+      run: dotnet pack --configuration ${{ secrets.PACKAGE_CONFIG }} --no-build /p:Version=${{ env.BUILD_VERSION }}
 
     - name: Push
       run: dotnet nuget push **/*.nupkg --source "github" --skip-duplicate --api-key ${{ secrets.PACKAGE_PASSWORD }}
