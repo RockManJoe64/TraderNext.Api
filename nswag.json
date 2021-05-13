@@ -1,6 +1,6 @@
 {
   "runtime": "Net50",
-  "defaultVariables": "CoolName=TraderNextApi",
+  "defaultVariables": "controller=TraderNextApi",
   "documentGenerator": {
     "fromDocument": {
       "newLineBehavior": "Auto",
