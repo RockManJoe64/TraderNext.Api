@@ -30,7 +30,7 @@
 
   <Target Name="NSwag" AfterTargets="BeforeBuild;BeforeRebuild">
     <Delete Files="$(ProjectDir)\Api\TraderNextApi.cs" />
-    <Delete Files="$(ProjectDir)\module\api\tradernext.api.ts" />
+    <Delete Files="$(ProjectDir)\typescript\src\tradernext.api.ts" />
     <Copy SourceFiles="@(ReferencePath)" DestinationFolder="$(OutDir)References" />
     <Exec Command="$(NSwagExe_Net50) run nswag.json /variables:Configuration=$(Configuration),OutDir=$(OutDir),CoolName=TraderNextApi" />
     <RemoveDir Directories="$(OutDir)References" />

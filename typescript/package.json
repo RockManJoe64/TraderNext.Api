@@ -1,8 +1,9 @@
 {
-  "name": "tradernext.api",
+  "name": "@rockmanjoe64/tradernext.api",
   "version": "0.1.0",
   "description": "An Open API specification for the TraderNEXT platform",
-  "main": "index.js",
+  "main": "src/tradernext.api.js",
+  "types": "src/tradernext.api.d.ts",
   "scripts": {
     "test": "test"
   },
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/RockManJoe64/TraderNext.Api/issues"
   },
-  "homepage": "https://github.com/RockManJoe64/TraderNext.Api#readme"
+  "homepage": "https://github.com/RockManJoe64/TraderNext.Api#readme",
+  "dependencies": {
+    "es6-shim": "^0.35.6",
+    "whatwg-fetch": "^3.6.2"
+  },
+  "devDependencies": {
+    "@types/es6-promise": "^3.3.0"
+  }
 }

@@ -13,7 +13,7 @@
       "className": "{controller}Client",
       "moduleName": "tradernext",
       "namespace": "api",
-      "typeScriptVersion": 2.7,
+      "typeScriptVersion": 4.2,
       "template": "Fetch",
       "promiseType": "Promise",
       "httpClass": "HttpClient",
@@ -24,7 +24,7 @@
       "dateTimeType": "Date",
       "nullValue": "Undefined",
       "generateClientClasses": true,
-      "generateClientInterfaces": true,
+      "generateClientInterfaces": false,
       "generateOptionalParameters": true,
       "exportTypes": true,
       "wrapDtoExceptions": false,
@@ -67,7 +67,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "module/api/tradernext.api.ts",
+      "output": "typescript/src/tradernext.api.ts",
       "newLineBehavior": "Auto"
     },
     "openApiToCSharpClient": {
