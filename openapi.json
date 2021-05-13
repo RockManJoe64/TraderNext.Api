@@ -338,15 +338,11 @@
             "$ref": "#/components/schemas/Enumeration"
           }
         }
-      }
-    },
-    "requestBodies": {
+      },
       "FetchOrdersRequest": {
         "type": "object",
         "properties": {}
-      }
-    },
-    "responses": {
+      },
       "FetchOrdersResponse": {
         "type": "object",
         "properties": {
