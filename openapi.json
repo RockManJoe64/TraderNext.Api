@@ -390,6 +390,17 @@
           }
         }
       },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "ValidationError": {
         "type": "object",
         "properties": {
@@ -428,11 +439,15 @@
         "type": "object",
         "properties": {
           "valid": {
-            "type": "boolean"
+            "type": "enum",
+            "enum": ["valid", "invalid", "error"]
           },
           "orderId": {
             "type": "integer",
             "format": "int64"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
           },
           "validationErrors": {
             "type": "array",
