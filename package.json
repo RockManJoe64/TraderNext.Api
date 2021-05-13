@@ -1,0 +1,19 @@
+{
+  "name": "tradernext.api",
+  "version": "0.1.0",
+  "description": "An Open API specification for the TraderNEXT platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RockManJoe64/TraderNext.Api.git"
+  },
+  "author": "Jose E. Chavez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RockManJoe64/TraderNext.Api/issues"
+  },
+  "homepage": "https://github.com/RockManJoe64/TraderNext.Api#readme"
+}
