@@ -61,6 +61,57 @@
             "description": "NotFound"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Create an order",
+        "description": "",
+        "operationId": "createOrder",
+        "requestBody": {
+          "description": "The order to create",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The order request is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while creating the order",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/user": {
@@ -339,6 +390,17 @@
           }
         }
       },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "FetchOrdersRequest": {
         "type": "object",
         "properties": {}
@@ -350,6 +412,32 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Order"
+            }
+          }
+        }
+      },
+      "CreateOrderRequest": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/Order"
+          }
+        }
+      },
+      "CreateOrderResponse": {
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          }
+          "orderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "validationErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
             }
           }
         }
