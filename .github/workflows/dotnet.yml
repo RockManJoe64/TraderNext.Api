@@ -64,8 +64,9 @@ jobs:
 
     - name: Setup version
       run: |
-        VERSION_NEW=`jq '.version' ./typescript/package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
-        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW,/" ./typescript/package.json
+        cd typescript
+        VERSION_NEW=`jq '.version' ./package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
+        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW,/" ./package.json
         CONFIGURATION=Release
         echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
         echo "CONFIG=$CONFIGURATION" >> $GITHUB_ENV
@@ -84,9 +85,10 @@ jobs:
 
     - name: Setup NPM credentials
       run: |
-        rm -rf ./typescript/.npmrc
-        mv ./typescript/.npmrcci ./typescript/.npmrc
-        sed -i -e "s/GITHUB_TOKEN/$GITHUB_TOKEN/" ./typescript/.npmrc
+        cd typescript
+        rm -rf ./.npmrc
+        mv ./.npmrcci ./.npmrc
+        sed -i -e "s/GITHUB_TOKEN/$GITHUB_TOKEN/" ./.npmrc
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGE_PASSWORD }}
 
@@ -97,4 +99,6 @@ jobs:
         tsc
     
     - name: Publish
-      run: npm publish
+      run: |
+        cd typescript
+        npm publish
