@@ -64,24 +64,24 @@ jobs:
 
     - name: Setup version
       run: |
-        cd typescript 
-        VERSION_NEW=`jq '.version' package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
-        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW/" package.json
+        VERSION_NEW=`jq '.version' ./typescript/package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
+        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW/" ./typescript/package.json
         CONFIGURATION=Release
         echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
         echo "CONFIG=$CONFIGURATION" >> $GITHUB_ENV
-        echo "NUPKG_PATH=./bin/$CONFIGURATION/TraderNext.Api.$VERSION_NEW.nupkg" >> $GITHUB_ENV
         echo "GITHUB_TOKEN=${{ secrets.PACKAGE_PASSWORD }}" >> $GITHUB_ENV
-    
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration ${{ env.CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
+
     - name: Setup NPM credentials
       run: |
-        cd typescript
-        rm -rf ./.npmrc
-        mv ./.npmrcci ./.npmrc
-        sed -i -e "s/GITHUB_TOKEN/$GITHUB_TOKEN/" ./.npmrc
-
-    - name: Generate typescript code
-      run: dotnet build --configuration ${{ env.CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
+        rm -rf ./typescript/.npmrc
+        mv ./typescript/.npmrcci ./typescript/.npmrc
+        sed -i -e "s/GITHUB_TOKEN/$GITHUB_TOKEN/" ./typescript/.npmrc
 
     - name: Compile typescript
       run: |
