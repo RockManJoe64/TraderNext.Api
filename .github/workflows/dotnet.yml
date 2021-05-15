@@ -64,6 +64,7 @@ jobs:
 
     - name: Setup version
       run: |
+        cd typescript 
         VERSION_NEW=`jq '.version' package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
         sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW/" package.json
         CONFIGURATION=Release
