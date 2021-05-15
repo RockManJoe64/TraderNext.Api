@@ -44,3 +44,49 @@ jobs:
 
     - name: Push
       run: dotnet nuget push ${{ env.NUPKG_PATH }} --source "github" --skip-duplicate --api-key ${{ secrets.PACKAGE_PASSWORD }}
+
+  typescript_build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+    - name: Setup version
+      run: |
+        VERSION_NEW=`jq '.version' package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
+        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW/" package.json
+        CONFIGURATION=Release
+        echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
+        echo "CONFIG=$CONFIGURATION" >> $GITHUB_ENV
+        echo "NUPKG_PATH=./bin/$CONFIGURATION/TraderNext.Api.$VERSION_NEW.nupkg" >> $GITHUB_ENV
+        echo "GITHUB_TOKEN=${{ secrets.PACKAGE_PASSWORD }}" >> $GITHUB_ENV
+    
+    - name: Setup NPM credentials
+      run: |
+        cd typescript
+        rm -rf ./.npmrc
+        mv ./.npmrcci ./.npmrc
+        sed -i -e "s/GITHUB_TOKEN/$GITHUB_TOKEN/" ./.npmrc
+
+    - name: Generate typescript code
+      run: dotnet build --configuration ${{ env.CONFIG }} /p:VersionPrefix=${{ env.BUILD_VERSION }}
+
+    - name: Compile typescript
+      run: |
+        cd typescript
+        npm install typescript --save-dev
+        tsc
+    
+    - name: Publish
+      run: npm publish

@@ -4,3 +4,6 @@
 
 @RockManJoe64:registry=https://npm.pkg.github.com/
 
+# Github Token
+
+//npm.pkg.github.com/:_authToken=GITHUB_TOKEN

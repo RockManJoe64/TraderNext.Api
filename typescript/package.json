@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git://github.com/RockManJoe64/TraderNext.Api.git"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "author": "Jose E. Chavez",
   "license": "MIT",
   "bugs": {
