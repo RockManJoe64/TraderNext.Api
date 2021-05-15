@@ -1,0 +1,6 @@
+src/
+.gitignore
+.npmrc
+.npmignore
+package-lock.json
+tsconfig.json

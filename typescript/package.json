@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RockManJoe64/TraderNext.Api.git"
+    "url": "git://github.com/RockManJoe64/TraderNext.Api.git"
   },
   "author": "Jose E. Chavez",
   "license": "MIT",
@@ -17,11 +17,6 @@
     "url": "https://github.com/RockManJoe64/TraderNext.Api/issues"
   },
   "homepage": "https://github.com/RockManJoe64/TraderNext.Api#readme",
-  "dependencies": {
-    "es6-shim": "^0.35.6",
-    "whatwg-fetch": "^3.6.2"
-  },
-  "devDependencies": {
-    "@types/es6-promise": "^3.3.0"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
