@@ -64,8 +64,8 @@ jobs:
 
     - name: Setup version
       run: |
-        VERSION_NEW=`jq '.version' ./typescript/package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER,/"`
-        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW/" ./typescript/package.json
+        VERSION_NEW=`jq '.version' ./typescript/package.json | sed -e "s/\.0/\.$GITHUB_RUN_NUMBER/"`
+        sed -i -e "s/\"version\":.*/\"version\": $VERSION_NEW,/" ./typescript/package.json
         CONFIGURATION=Release
         echo "BUILD_VERSION=`echo $VERSION_NEW`" >> $GITHUB_ENV
         echo "CONFIG=$CONFIGURATION" >> $GITHUB_ENV
