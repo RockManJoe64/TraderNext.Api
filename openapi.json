@@ -92,7 +92,6 @@
             }
           },
           "400": {
-            "description": "The order request is invalid",
             "content": {
               "application/json": {
                 "schema": {
@@ -106,7 +105,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateOrderResponse"
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -320,7 +324,7 @@
   },
   "components": {
     "schemas": {
-      "Enumeration": {
+      "DictionaryEntry": {
         "type": "object",
         "properties": {
           "id": {
@@ -335,15 +339,30 @@
       "Order": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
           "orderId": {
             "type": "string"
           },
+          "secondaryOrderId": {
+            "type": "string"
+          },
+          "orderType": {
+            "type": "string",
+            "enum": [
+              "market", 
+              "limit",
+              "stop",
+              "stoplimit"
+            ]
+          },
+          "marketExchange": {
+            "$ref": "#/components/schemas/DictionaryEntry"
+          },
           "symbol": {
             "type": "string"
+          },
+          "side": {
+            "type": "string",
+            "enum": ["buy", "sell"]
           },
           "quantity": {
             "type": "integer",
@@ -352,6 +371,41 @@
           "price": {
             "type": "number",
             "format": "double"
+          },
+          "stopPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "timeInForce": {
+            "type": "string",
+            "enum": [
+              "day", 
+              "gtc",
+              "gtd",
+              "gtx",
+              "ioc",
+              "fok"
+            ]
+          },
+          "effectiveTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expireTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transactionTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tradeDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "settleDate": {
+            "type": "string",
+            "format": "date"
           }
         }
       },
@@ -386,11 +440,11 @@
             "description": "User Status"
           },
           "clientFirm": {
-            "$ref": "#/components/schemas/Enumeration"
+            "$ref": "#/components/schemas/DictionaryEntry"
           }
         }
       },
-      "Error": {
+      "ServerError": {
         "type": "object",
         "properties": {
           "errorCode": {
@@ -439,15 +493,15 @@
         "type": "object",
         "properties": {
           "valid": {
-            "type": "enum",
-            "enum": ["invalid", "valid", "error"]
+            "type": "boolean"
           },
           "orderId": {
             "type": "integer",
             "format": "int64"
           },
-          "error": {
-            "$ref": "#/components/schemas/Error"
+          "secondaryOrderId": {
+            "type": "integer",
+            "format": "int64"
           },
           "validationErrors": {
             "type": "array",
