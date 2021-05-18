@@ -145,7 +145,7 @@
       "inlineNamedTuples": true,
       "inlineNamedAny": false,
       "generateDtoTypes": true,
-      "generateOptionalPropertiesAsNullable": false,
+      "generateOptionalPropertiesAsNullable": true,
       "generateNullableReferenceTypes": false,
       "templateDirectory": null,
       "typeNameGeneratorType": null,
