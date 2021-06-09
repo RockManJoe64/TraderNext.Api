@@ -3,16 +3,16 @@
   "defaultVariables": "controller=TraderNextApi",
   "documentGenerator": {
     "fromDocument": {
-      "newLineBehavior": "Auto",
+      "url": "openapi.json",
       "output": null,
-      "url": "openapi.json"
+      "newLineBehavior": "Auto"
     }
   },
   "codeGenerators": {
     "openApiToTypeScriptClient": {
-      "className": "{controller}Client",
+      "className": "TraderNextClient",
       "moduleName": "tradernext",
-      "namespace": "api",
+      "namespace": "",
       "typeScriptVersion": 4.2,
       "template": "Fetch",
       "promiseType": "Promise",
@@ -65,6 +65,7 @@
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,
+      "checksumCacheEnabled": false,
       "serviceHost": null,
       "serviceSchemes": null,
       "output": "typescript/src/tradernext.api.ts",
@@ -151,6 +152,7 @@
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,
+      "checksumCacheEnabled": false,
       "serviceHost": null,
       "serviceSchemes": null,
       "output": "Api/TraderNextApi.cs",
